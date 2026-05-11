@@ -1,0 +1,34 @@
+[env]
+APP_NAME = "multitarget-poem"
+[tasks.docker_build]
+run = "docker build -t $APP_NAME:latest ."
+
+[tasks.docker_run]
+depends = ["docker_build"]
+run = """
+set -e
+docker stop $APP_NAME || true
+docker rm $APP_NAME || true
+docker run -d --name $APP_NAME -p 3000:3000 $APP_NAME
+"""
+[tasks.kind_load]
+depends = ["docker_build"]
+run = '''
+kind load docker-image $APP_NAME:latest
+'''
+[tasks.port_forward]
+run = "kubectl port-forward svc/$(kubectl get svc -l app=$APP_NAME -o jsonpath='{.items[0].metadata.name}') 30000:80 &"
+[tasks.pulumi_up_ts]
+dir = "infra-ts"
+depends = ["kind_load"]
+run = "pulumi config set APP_NAME $APP_NAME && pulumi up -y"
+[tasks.pulumi_up_py]
+dir = "infra-py"
+depends = ["kind_load"]
+run = "pulumi config set APP_NAME $APP_NAME && pulumi up -y"
+
+[tasks.format_ts]
+dir = "infra-ts"
+run = '''
+bunx @biomejs/biome format --write .
+'''

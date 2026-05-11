@@ -1,0 +1,2 @@
+config:
+  infra-py:APP_NAME: multitarget-poem

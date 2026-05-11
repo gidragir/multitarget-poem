@@ -1,0 +1,13 @@
+{
+	"name": "infra-ts",
+	"main": "index.ts",
+	"devDependencies": {
+		"@biomejs/biome": "2.4.15",
+		"@types/node": "^25.6.2",
+		"typescript": "^6.0.3"
+	},
+	"dependencies": {
+		"@pulumi/kubernetes": "^4.30.0",
+		"@pulumi/pulumi": "^3.113.0"
+	}
+}

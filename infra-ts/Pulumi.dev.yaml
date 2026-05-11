@@ -1,0 +1,2 @@
+config:
+  infra-ts:APP_NAME: multitarget-poem
