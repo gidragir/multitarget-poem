@@ -1,0 +1,14 @@
+image:
+  repository: multitarget-poem
+  tag: latest
+  pullPolicy: Always
+
+service:
+  type: NodePort
+  port: 80
+  targetPort: 3000
+  nodePort: 30000
+  containerPort: 3000
+
+securityContext:
+  runAsUser: 10001

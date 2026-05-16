@@ -1,0 +1,12 @@
+services:
+  traefik:
+    image: traefik:3.7.1
+    ports:
+      - 8080:8080
+      - 80:80
+    volumes:
+      - $PWD/traefik.yml:/etc/traefik/traefik.yml
+      - $PWD/dynamic.yml:/etc/traefik/dynamic.yml
+      - /var/run/docker.sock:/var/run/docker.sock
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

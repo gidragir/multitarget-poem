@@ -1,0 +1,12 @@
+api:
+  dashboard: true
+  insecure: true # dashboard доступен на :8080 без auth
+
+entryPoints:
+  web:
+    address: ':80'
+
+providers:
+  file:
+    filename: /etc/traefik/dynamic.yml
+    watch: true

@@ -3,6 +3,7 @@ description: A minimal TypeScript Pulumi program
 runtime:
   name: nodejs
   options:
+    binary: node
     packagemanager: bun
 config:
   pulumi:tags:

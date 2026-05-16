@@ -1,0 +1,20 @@
+http:
+   routers:
+      # Маршрутизатор для публичного трафика
+      rust-public-router:
+         # Пропускаем только запросы к /api и /graphql
+         rule: 'PathPrefix(`/api`) || PathPrefix(`/graphql`)'
+         entryPoints:
+            - web
+         service: rust-public-service
+
+   services:
+      # Определение сервиса и его адреса
+      rust-public-service:
+         loadBalancer:
+            servers:
+               # В зависимости от инфраструктуры:
+               # 127.0.0.1:8080 - если Traefik и приложение запущены на хосте без Docker
+               # host.docker.internal:8080 - если Traefik в Docker, а приложение на хосте
+               # Имя_контейнера:8080 - если оба в одной Docker-сети
+               - url: 'http://host.docker.internal:3000'

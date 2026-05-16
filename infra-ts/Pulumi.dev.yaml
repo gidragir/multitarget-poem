@@ -1,2 +1,4 @@
 config:
   infra-ts:APP_NAME: multitarget-poem
+  infra-ts:CHART_PATH: ../chart
+encryptionsalt: v1:NGwBfvzXk0A=:v1:9pqrBb/bot8I5b1s:s8LTO1ilsgw/CD/8pEaqYKzG7dM/rw==
